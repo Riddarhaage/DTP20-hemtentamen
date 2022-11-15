@@ -107,9 +107,12 @@
         public static void PrintHelp()
         {
             Console.WriteLine("Kommandon:");
-            Console.WriteLine("hjälp    lista denna hjälp");
-            Console.WriteLine("lista    lista att-göra-listan");
-            Console.WriteLine("sluta    spara att-göra-listan och sluta");
+            Console.WriteLine("hjälp        lista denna hjälp");
+            Console.WriteLine("lista        lista alla uppfigter med status 'aktiv' i att-göra-listan");
+            Console.WriteLine("lista allt   lista allt i att-göra-listan");
+            Console.WriteLine("beskriv      samma som 'lista' men uppgifts-beskrivning skrivs också ut");
+            Console.WriteLine("sluta        spara att-göra-listan och sluta");
+            
         }
     }
     class MainClass
@@ -140,6 +143,10 @@
                     {
                         Todo.PrintTodoListActive();
                     }
+                }
+                else if (MyIO.Equals(command, "beskriv"))
+                {
+                        Todo.PrintTodoListActive(true);
                 }
                 else
                 {
