@@ -94,6 +94,16 @@
             }
             PrintFoot(verbose);
         }
+        public static void PrintTodoListActive(bool verbose = false)
+        {
+            PrintHead(verbose);
+            foreach (TodoItem item in list)
+                if (item.status == Active)
+                {
+                    item.Print(verbose);
+                }
+            PrintFoot(verbose);
+        }
         public static void PrintHelp()
         {
             Console.WriteLine("Kommandon:");
@@ -126,6 +136,10 @@
                 {
                     if (MyIO.HasArgument(command, "allt"))
                         Todo.PrintTodoList();
+                    else
+                    {
+                        Todo.PrintTodoListActive();
+                    }
                 }
                 else
                 {
