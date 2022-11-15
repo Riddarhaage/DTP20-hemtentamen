@@ -126,6 +126,7 @@ namespace dtp15_todolist
             Console.WriteLine("lista        lista alla uppfigter med status 'aktiv' i att-göra-listan");
             Console.WriteLine("lista allt   lista allt i att-göra-listan");
             Console.WriteLine("ny           lägg till ny uppgift i listan");
+            Console.WriteLine("spara        Spara alla ändringar i listan");
             Console.WriteLine("beskriv      samma som 'lista' men uppgifts-beskrivning skrivs också ut");
             Console.WriteLine("sluta        spara att-göra-listan och sluta");
 
@@ -142,6 +143,15 @@ namespace dtp15_todolist
             item.status = Int32.Parse(Console.ReadLine());
             list.Add(item);
             Console.WriteLine("Uppgift tillagd!");
+        }
+        public static void SaveList()
+        {
+            using StreamWriter outfile = new StreamWriter("todo.lis");
+            foreach(TodoItem item in list)
+            {
+                if(item != null)
+                   outfile.WriteLine($"{item.priority}|{item.status}|{item.task}|{item.taskDescription}");
+            }
         }
     }
     class MainClass
@@ -184,6 +194,10 @@ namespace dtp15_todolist
                 {
                     Todo.TodoItem item = new Todo.TodoItem(1, "");
                     Todo.AddNewItem(item);
+                }
+                else if (MyIO.Equals(command, "spara"))
+                {
+                    Todo.SaveList();
                 }
                 else
                 {
