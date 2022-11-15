@@ -1,4 +1,6 @@
-﻿namespace dtp15_todolist
+﻿using System.Reflection;
+
+namespace dtp15_todolist
 {
     public class Todo
     {
@@ -108,11 +110,16 @@
         {
             Console.WriteLine("Kommandon:");
             Console.WriteLine("hjälp        lista denna hjälp");
+            Console.WriteLine("load         ladda todo.lis");
             Console.WriteLine("lista        lista alla uppfigter med status 'aktiv' i att-göra-listan");
             Console.WriteLine("lista allt   lista allt i att-göra-listan");
             Console.WriteLine("beskriv      samma som 'lista' men uppgifts-beskrivning skrivs också ut");
             Console.WriteLine("sluta        spara att-göra-listan och sluta");
             
+        }
+        public static void AddNewItem(string item)
+        {
+
         }
     }
     class MainClass
@@ -120,7 +127,6 @@
         public static void Main(string[] args)
         {
             Console.WriteLine("Välkommen till att-göra-listan!");
-            Todo.ReadListFromFile();
             Todo.PrintHelp();
             string command;
             do
@@ -129,6 +135,10 @@
                 if (MyIO.Equals(command, "hjälp"))
                 {
                     Todo.PrintHelp();
+                }
+                else if (MyIO.Equals(command, "load"))
+                {
+                    Todo.ReadListFromFile();
                 }
                 else if (MyIO.Equals(command, "sluta"))
                 {
