@@ -1,0 +1,21 @@
+Att Göra:
+prio1
+
+Ändra kommandot "lista" så att den endast visar det som är satt till "active".
+Ändra "lista allt" så att den gör det som "lista" gör i nuläget.
+Implementera kommandot "beskriv", den ska fungera som "lista" plus att den även skriver ut task-description.
+Implementera kommandot "ny" för genom konsolen lägga till ytterligar uppgifter i listan.
+Implementera kommandot "ladda" för att ladda "todo.lis".
+Implementera kommandot "spara" för att spara ändringar som gjorts i listan.
+Implementera kommandot "aktivera /uppgift/" som ändrar status till "active" på den uppgift som anges.
+Implemendera kommandot "klar /uppgift/" som ändrar status till "ready" på den uppgift som anges.
+Implementera kommandot "vänta /uppgift/" som ändrar status till "waiting" på den uppgift som anges.
+För varje nytt implementerat kommando så ska de även läggas till i hjälp-texten som syns i början när programmet körs.
+
+
+Prio2
+(vg)Implementera kommando "ny /uppgift/" som skapar en ny uppgift där namnet sätts som det man anger istället för "/uppgift/".
+(vg)Implementera kommando "beskriv allt" som listar alla uppgfifter och skrivet ut "beskrivning" till dem.
+(vg)Implementera kommando "ladda /fil/" ladda lista från en fil.
+(vg)Implementera kommando "spara /fil/" spara uppgifterna på ny fil med angivet filnamn.
+refaktorera och städa upp kod.

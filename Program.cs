@@ -125,9 +125,7 @@
                 else if (MyIO.Equals(command, "lista"))
                 {
                     if (MyIO.HasArgument(command, "allt"))
-                        Todo.PrintTodoList(verbose: true);
-                    else
-                        Todo.PrintTodoList(verbose: false);
+                        Todo.PrintTodoList();
                 }
                 else
                 {
