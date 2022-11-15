@@ -89,37 +89,59 @@ namespace dtp15_todolist
         }
         public static void PrintTodoList(bool verbose = false)
         {
-            PrintHead(verbose);
+            if (Todo.list.Count == 0)
+            {
+                Console.WriteLine("Listan är tom!");
+            }
+            else
+                PrintHead(verbose);
             foreach (TodoItem item in list)
             {
                 item.Print(verbose);
             }
-            PrintFoot(verbose);
+            if (Todo.list.Count != 0)
+                PrintFoot(verbose);
         }
         public static void PrintTodoListActive(bool verbose = false)
         {
-            PrintHead(verbose);
+            if (Todo.list.Count == 0)
+            {
+                Console.WriteLine("Listan är tom!");
+            }
+            else
+                PrintHead(verbose);
             foreach (TodoItem item in list)
                 if (item.status == Active)
                 {
                     item.Print(verbose);
                 }
-            PrintFoot(verbose);
+            if (Todo.list.Count != 0)
+                PrintFoot(verbose);
         }
         public static void PrintHelp()
         {
             Console.WriteLine("Kommandon:");
             Console.WriteLine("hjälp        lista denna hjälp");
-            Console.WriteLine("load         ladda todo.lis");
+            Console.WriteLine("ladda        ladda todo.lis");
             Console.WriteLine("lista        lista alla uppfigter med status 'aktiv' i att-göra-listan");
             Console.WriteLine("lista allt   lista allt i att-göra-listan");
+            Console.WriteLine("ny           lägg till ny uppgift i listan");
             Console.WriteLine("beskriv      samma som 'lista' men uppgifts-beskrivning skrivs också ut");
             Console.WriteLine("sluta        spara att-göra-listan och sluta");
-            
-        }
-        public static void AddNewItem(string item)
-        {
 
+        }
+        public static void AddNewItem(TodoItem item)
+        {
+            Console.WriteLine("Ange namn på uppgift: ");
+            item.task = Console.ReadLine();
+            Console.WriteLine("ange beskrivning av uppgift: ");
+            item.taskDescription = Console.ReadLine();
+            Console.WriteLine("Ange uppgiftens prioritet från 1 till 4: "); //ändra så det blir tydligare vilka olika prioriteter som finns. TBD
+            item.priority = Int32.Parse(Console.ReadLine());
+            Console.WriteLine("Ange uppgiftens status: "); //Visa vilka statusar som finns tillgängliga innan det skrivs in.
+            item.status = Int32.Parse(Console.ReadLine());
+            list.Add(item);
+            Console.WriteLine("Uppgift tillagd!");
         }
     }
     class MainClass
@@ -136,7 +158,7 @@ namespace dtp15_todolist
                 {
                     Todo.PrintHelp();
                 }
-                else if (MyIO.Equals(command, "load"))
+                else if (MyIO.Equals(command, "ladda"))
                 {
                     Todo.ReadListFromFile();
                 }
@@ -156,7 +178,12 @@ namespace dtp15_todolist
                 }
                 else if (MyIO.Equals(command, "beskriv"))
                 {
-                        Todo.PrintTodoListActive(true);
+                    Todo.PrintTodoListActive(true);
+                }
+                else if (MyIO.Equals(command, "ny"))
+                {
+                    Todo.TodoItem item = new Todo.TodoItem(1, "");
+                    Todo.AddNewItem(item);
                 }
                 else
                 {
