@@ -162,14 +162,6 @@ namespace dtp15_todolist
                    outfile.WriteLine($"{item.priority}|{item.status}|{item.task}|{item.taskDescription}");
             }
         }
-        public static void SetActive(string s)
-        {
-            foreach(TodoItem item in list)
-            {
-                if (s == item.task)
-                    item.status = Active;
-            }
-        }
     }
     class MainClass
     {
@@ -218,16 +210,8 @@ namespace dtp15_todolist
                 }
                 else if (MyIO.Equals(command, "aktivera"))
                 {
-                    string s = Console.ReadLine();
-                    int i = 0;
-                    foreach(Todo.TodoItem item in Todo.list)
-                    {
-                        if (Todo.list[i].task == s)
-                        {
-                            Todo.list[i].status = 1;
-                        }
-                        i++;
-                    }
+                    MyIO.HasArgument(command, command);
+                    setStatusActive(command);
                 }
                 else
                 {
@@ -235,6 +219,27 @@ namespace dtp15_todolist
                 }
             }
             while (true);
+        }
+
+        private static void setStatusActive(string command)
+        {
+            string[] words = command.Split(' ');
+            foreach (Todo.TodoItem item in Todo.list)
+            {
+                if (words.Length <= 2)
+                {
+                    if (item.task == words[1])
+                    {
+                        item.status = 1;
+                    }
+                }
+                if (words.Length > 2)
+                    if (item.task == words[1] + " " + words[2])
+                    {
+                        item.status = 1;
+                    }
+            }
+            Console.WriteLine("status satt till 'aktiv'");
         }
     }
     class MyIO
