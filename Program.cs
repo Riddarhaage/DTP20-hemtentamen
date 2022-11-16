@@ -136,8 +136,10 @@ namespace dtp15_todolist
             Console.WriteLine("ny                    lägg till ny uppgift i listan");
             Console.WriteLine("spara                 Spara alla ändringar i listan");
             Console.WriteLine("beskriv               samma som 'lista' men uppgifts-beskrivning skrivs också ut");
+            Console.WriteLine("beskriv allt          samma som 'lista allt' men uppgifts-beskrivning skrivs också ut");
             Console.WriteLine("aktivera /uppgift/    sätter status till 'aktiv' på den uppgift man valt");
             Console.WriteLine("klar /uppgift/        sätter status till 'avklarad' på den uppgift man valt");
+            Console.WriteLine("vänta /uppgift/       sätter status till 'väntande' på den uppgift man valt");
             Console.WriteLine("sluta                 spara att-göra-listan och sluta");
 
         }
@@ -199,6 +201,8 @@ namespace dtp15_todolist
                 else if (MyIO.Equals(command, "beskriv"))
                 {
                     Todo.PrintTodoListActive(true);
+                    if (MyIO.HasArgument(command, "allt"))
+                        Todo.PrintTodoList(true);
                 }
                 else if (MyIO.Equals(command, "ny"))
                 {
@@ -218,6 +222,11 @@ namespace dtp15_todolist
                 {
                     MyIO.HasArgument(command, command);
                     setStatusReady(command);
+                }
+                else if (MyIO.Equals(command, "vänta"))
+                {
+                    MyIO.HasArgument(command, command);
+                    setStatusWaiting(command);
                 }
                 else
                 {
@@ -266,6 +275,26 @@ namespace dtp15_todolist
                     }
             }
             Console.WriteLine("status satt till 'avklarad'");
+        }
+        private static void setStatusWaiting(string command)
+        {
+            string[] words = command.Split(' ');
+            foreach (Todo.TodoItem item in Todo.list)
+            {
+                if (words.Length <= 2)
+                {
+                    if (item.task == words[1])
+                    {
+                        item.status = Todo.Waiting;
+                    }
+                }
+                if (words.Length > 2)
+                    if (item.task == words[1] + " " + words[2])
+                    {
+                        item.status = Todo.Waiting;
+                    }
+            }
+            Console.WriteLine("status satt till 'väntande'");
         }
     }
     class MyIO
