@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 
 namespace dtp15_todolist
@@ -126,12 +127,29 @@ namespace dtp15_todolist
             if (Todo.list.Count != 0)
                 PrintFoot(verbose);
         }
+        public static void PrintTodoListWaiting(bool verbose = false)
+        {
+            if (Todo.list.Count == 0)
+            {
+                Console.WriteLine("Listan är tom!");
+            }
+            else
+                PrintHead(verbose);
+            foreach (TodoItem item in list)
+                if (item.status == Waiting)
+                {
+                    item.Print(verbose);
+                }
+            if (Todo.list.Count != 0)
+                PrintFoot(verbose);
+        }
         public static void PrintHelp()
         {
             Console.WriteLine("Kommandon:");
             Console.WriteLine("hjälp                 lista denna hjälp");
             Console.WriteLine("ladda                 ladda todo.lis");
             Console.WriteLine("lista                 lista alla uppfigter med status 'aktiv' i att-göra-listan");
+            Console.WriteLine("lista väntande        lista alla uppfigter med status 'väntande' i att-göra-listan");
             Console.WriteLine("lista allt            lista allt i att-göra-listan");
             Console.WriteLine("ny                    lägg till ny uppgift i listan");
             Console.WriteLine("spara                 Spara alla ändringar i listan");
@@ -193,6 +211,10 @@ namespace dtp15_todolist
                 {
                     if (MyIO.HasArgument(command, "allt"))
                         Todo.PrintTodoList();
+                    else if (MyIO.HasArgument(command, "väntande"))
+                    {
+                        Todo.PrintTodoListWaiting();
+                    }
                     else
                     {
                         Todo.PrintTodoListActive();
@@ -202,7 +224,10 @@ namespace dtp15_todolist
                 {
                     Todo.PrintTodoListActive(true);
                     if (MyIO.HasArgument(command, "allt"))
+                    {
                         Todo.PrintTodoList(true);
+                    }
+                        
                 }
                 else if (MyIO.Equals(command, "ny"))
                 {
