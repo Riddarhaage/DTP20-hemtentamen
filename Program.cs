@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using System.Runtime.CompilerServices;
 
 namespace dtp15_todolist
 {
@@ -26,6 +27,13 @@ namespace dtp15_todolist
             public string task;
             public string taskDescription;
             public TodoItem(int priority, string task)
+            {
+                this.status = Active;
+                this.priority = priority;
+                this.task = task;
+                this.taskDescription = "";
+            }
+            public TodoItem()
             {
                 this.status = Active;
                 this.priority = priority;
@@ -128,6 +136,7 @@ namespace dtp15_todolist
             Console.WriteLine("ny           lägg till ny uppgift i listan");
             Console.WriteLine("spara        Spara alla ändringar i listan");
             Console.WriteLine("beskriv      samma som 'lista' men uppgifts-beskrivning skrivs också ut");
+            Console.WriteLine("aktivera     Sätter status till 'aktiv' på den uppgift man valt");
             Console.WriteLine("sluta        spara att-göra-listan och sluta");
 
         }
@@ -151,6 +160,14 @@ namespace dtp15_todolist
             {
                 if(item != null)
                    outfile.WriteLine($"{item.priority}|{item.status}|{item.task}|{item.taskDescription}");
+            }
+        }
+        public static void SetActive(string s)
+        {
+            foreach(TodoItem item in list)
+            {
+                if (s == item.task)
+                    item.status = Active;
             }
         }
     }
@@ -198,6 +215,19 @@ namespace dtp15_todolist
                 else if (MyIO.Equals(command, "spara"))
                 {
                     Todo.SaveList();
+                }
+                else if (MyIO.Equals(command, "aktivera"))
+                {
+                    string s = Console.ReadLine();
+                    int i = 0;
+                    foreach(Todo.TodoItem item in Todo.list)
+                    {
+                        if (Todo.list[i].task == s)
+                        {
+                            Todo.list[i].status = 1;
+                        }
+                        i++;
+                    }
                 }
                 else
                 {
