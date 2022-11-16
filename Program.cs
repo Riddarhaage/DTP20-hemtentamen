@@ -129,15 +129,16 @@ namespace dtp15_todolist
         public static void PrintHelp()
         {
             Console.WriteLine("Kommandon:");
-            Console.WriteLine("hjälp        lista denna hjälp");
-            Console.WriteLine("ladda        ladda todo.lis");
-            Console.WriteLine("lista        lista alla uppfigter med status 'aktiv' i att-göra-listan");
-            Console.WriteLine("lista allt   lista allt i att-göra-listan");
-            Console.WriteLine("ny           lägg till ny uppgift i listan");
-            Console.WriteLine("spara        Spara alla ändringar i listan");
-            Console.WriteLine("beskriv      samma som 'lista' men uppgifts-beskrivning skrivs också ut");
-            Console.WriteLine("aktivera     Sätter status till 'aktiv' på den uppgift man valt");
-            Console.WriteLine("sluta        spara att-göra-listan och sluta");
+            Console.WriteLine("hjälp                 lista denna hjälp");
+            Console.WriteLine("ladda                 ladda todo.lis");
+            Console.WriteLine("lista                 lista alla uppfigter med status 'aktiv' i att-göra-listan");
+            Console.WriteLine("lista allt            lista allt i att-göra-listan");
+            Console.WriteLine("ny                    lägg till ny uppgift i listan");
+            Console.WriteLine("spara                 Spara alla ändringar i listan");
+            Console.WriteLine("beskriv               samma som 'lista' men uppgifts-beskrivning skrivs också ut");
+            Console.WriteLine("aktivera /uppgift/    sätter status till 'aktiv' på den uppgift man valt");
+            Console.WriteLine("klar /uppgift/        sätter status till 'avklarad' på den uppgift man valt");
+            Console.WriteLine("sluta                 spara att-göra-listan och sluta");
 
         }
         public static void AddNewItem(TodoItem item)
@@ -213,6 +214,11 @@ namespace dtp15_todolist
                     MyIO.HasArgument(command, command);
                     setStatusActive(command);
                 }
+                else if (MyIO.Equals(command, "klar"))
+                {
+                    MyIO.HasArgument(command, command);
+                    setStatusReady(command);
+                }
                 else
                 {
                     Console.WriteLine($"Okänt kommando: {command}");
@@ -230,16 +236,36 @@ namespace dtp15_todolist
                 {
                     if (item.task == words[1])
                     {
-                        item.status = 1;
+                        item.status = Todo.Active;
                     }
                 }
                 if (words.Length > 2)
                     if (item.task == words[1] + " " + words[2])
                     {
-                        item.status = 1;
+                        item.status = Todo.Active;
                     }
             }
             Console.WriteLine("status satt till 'aktiv'");
+        }
+        private static void setStatusReady(string command)
+        {
+            string[] words = command.Split(' ');
+            foreach (Todo.TodoItem item in Todo.list)
+            {
+                if (words.Length <= 2)
+                {
+                    if (item.task == words[1])
+                    {
+                        item.status = Todo.Ready;
+                    }
+                }
+                if (words.Length > 2)
+                    if (item.task == words[1] + " " + words[2])
+                    {
+                        item.status = Todo.Ready;
+                    }
+            }
+            Console.WriteLine("status satt till 'avklarad'");
         }
     }
     class MyIO
