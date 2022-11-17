@@ -170,6 +170,7 @@ namespace dtp15_todolist
             Console.WriteLine("lista allt            lista allt i att-göra-listan");
             Console.WriteLine("ny                    lägg till ny uppgift i listan");
             Console.WriteLine("spara                 Spara alla ändringar i listan");
+            Console.WriteLine("spara /fil/           spara lista på ny fil med angivet filnamn");
             Console.WriteLine("beskriv               samma som 'lista' men uppgifts-beskrivning skrivs också ut");
             Console.WriteLine("beskriv allt          samma som 'lista allt' men uppgifts-beskrivning skrivs också ut");
             Console.WriteLine("aktivera /uppgift/    sätter status till 'aktiv' på den uppgift man valt");
@@ -198,6 +199,16 @@ namespace dtp15_todolist
             {
                 if(item != null)
                    outfile.WriteLine($"{item.priority}|{item.status}|{item.task}|{item.taskDescription}");
+            }
+        }
+        public static void SaveList(string command)
+        {
+            string[] words = command.Split(' ');
+            using StreamWriter outfile2 = new StreamWriter(words[1]);
+            foreach (TodoItem item in list)
+            {
+                if (item != null)
+                    outfile2.WriteLine($"{item.priority}|{item.status}|{item.task}|{item.taskDescription}");
             }
         }
     }
@@ -257,7 +268,19 @@ namespace dtp15_todolist
                 }
                 else if (MyIO.Equals(command, "spara"))
                 {
+                    string[] strArr = command.Split(' ');
+                    if (strArr.Length > 1)
+                    {
+                        Todo.SaveList(command);
+                    }
+                    else
                     Todo.SaveList();
+                        
+                    
+                   /* else
+                    {
+                        Todo.SaveList();
+                    }*/
                 }
                 else if (MyIO.Equals(command, "aktivera"))
                 {
@@ -368,6 +391,7 @@ namespace dtp15_todolist
             else
             {
                 string[] cwords = command.Split(' ');
+                expected = cwords[1];
                 if (cwords.Length < 2) return false;
                 if (cwords[1] == expected) return true;
             }
