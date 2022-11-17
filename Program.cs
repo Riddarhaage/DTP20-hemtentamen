@@ -76,6 +76,22 @@ namespace dtp15_todolist
             sr.Close();
             Console.WriteLine($"Läste {numRead} rader.");
         }
+        public static void ReadListFromFileOtherFile(string todoFileName)
+        {
+            Console.Write($"Läser från fil {todoFileName} ... ");
+            StreamReader sr = new StreamReader(todoFileName);
+            int numRead = 0;
+
+            string line;
+            while ((line = sr.ReadLine()) != null)
+            {
+                TodoItem item = new TodoItem(line);
+                list.Add(item);
+                numRead++;
+            }
+            sr.Close();
+            Console.WriteLine($"Läste {numRead} rader.");
+        }
         private static void PrintHeadOrFoot(bool head, bool verbose)
         {
             if (head)
@@ -164,6 +180,7 @@ namespace dtp15_todolist
             Console.WriteLine("Kommandon:");
             Console.WriteLine("hjälp                 lista denna hjälp");
             Console.WriteLine("ladda                 ladda todo.lis");
+            Console.WriteLine("ladda /fil/           ladda valfri fil");
             Console.WriteLine("lista                 lista alla uppfigter med status 'aktiv' i att-göra-listan");
             Console.WriteLine("lista väntande        lista alla uppfigter med status 'väntande' i att-göra-listan");
             Console.WriteLine("lista klara           lista alla uppfigter med status 'avklarad' i att-göra-listan");
@@ -228,7 +245,12 @@ namespace dtp15_todolist
                 }
                 else if (MyIO.Equals(command, "ladda"))
                 {
-                    Todo.ReadListFromFile();
+                    string[] strArr = command.Split(' ');
+                    if (strArr.Length > 1)
+                    {
+                        Todo.ReadListFromFileOtherFile(strArr[1]);
+                    }else
+                        Todo.ReadListFromFile();
                 }
                 else if (MyIO.Equals(command, "sluta"))
                 {
