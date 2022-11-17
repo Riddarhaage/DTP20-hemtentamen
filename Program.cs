@@ -275,12 +275,6 @@ namespace dtp15_todolist
                     }
                     else
                     Todo.SaveList();
-                        
-                    
-                   /* else
-                    {
-                        Todo.SaveList();
-                    }*/
                 }
                 else if (MyIO.Equals(command, "aktivera"))
                 {
@@ -391,7 +385,6 @@ namespace dtp15_todolist
             else
             {
                 string[] cwords = command.Split(' ');
-                expected = cwords[1];
                 if (cwords.Length < 2) return false;
                 if (cwords[1] == expected) return true;
             }
