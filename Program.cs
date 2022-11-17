@@ -233,6 +233,7 @@ namespace dtp15_todolist
     {
         public static void Main(string[] args)
         {
+            Console.SetWindowSize(140, 30);
             Console.WriteLine("Välkommen till att-göra-listan!");
             Todo.PrintHelp();
             string command;
