@@ -54,7 +54,7 @@ namespace dtp15_todolist
                 string statusString = StatusToString(status);
                 Console.Write($"|{statusString,-12}|{priority,-6}|{task,-20}|");
                 if (verbose)
-                    Console.WriteLine($"{taskDescription,-71}|");
+                    Console.WriteLine($"{taskDescription,-87}|");
                 else
                     Console.WriteLine();
             }
@@ -97,11 +97,11 @@ namespace dtp15_todolist
             if (head)
             {
                 Console.Write("|status      |prio  |namn                |");
-                if (verbose) Console.WriteLine("beskrivning                                                            |");
+                if (verbose) Console.WriteLine("beskrivning                                                                            |");
                 else Console.WriteLine();
             }
             Console.Write("|------------|------|--------------------|");
-            if (verbose) Console.WriteLine("-----------------------------------------------------------------------|");
+            if (verbose) Console.WriteLine("---------------------------------------------------------------------------------------|");
             else Console.WriteLine();
         }
         private static void PrintHead(bool verbose)
