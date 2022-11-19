@@ -1,4 +1,17 @@
-1|1|köpa kaffe|Willys? Billigaste!
-1|1|köpa toapapper|Willys? Extra papper!
-2|3|köpa bordslampa|IKEA art. nr. 905.108.94
-2|2|rensa skrivbordet|NEeeeejjj!
+3|1|kommando lista|Ändra så "lista" så att den endast visar det som är satt till "active".
+3|1|lista allt|ändra så att den visar hela listan oavsett status
+3|1|beskriv|implementera kommando "beskriv", den ska fungera som lista + skriva ut task-description
+3|1|ny|implementera kommandot "ny" för att genom konsolen lägga till ytterligare uppgifter.
+3|1|ladda|kommandot ska ladda in filen "todo.lis"
+3|1|spara|kommandot ska spara ändringar i listan i "todo.lis"
+3|1|aktivera /uppgift/|ändrar status till "aktiv" på den uppgift man anger
+3|1|klar /uppgift/|ändrar status till "avklarad" på den uppfigt man anger
+3|1|vänta /uppgift/|ändrar status till "väntande" på den uppgift man anger
+3|1|PrintHelp()|Lägg till alla nya kommandon så de skrivs ut
+3|2|beskriv allt|listar alla uppgifter och deras beskrivning
+3|2|lista väntande|listar alla uppgifter med status "väntande"
+3|2|lista klar|listar alla uppgifter med status "avklarad"
+1|2|ny /uppgift/|skapa en ny uppgift där namnet sätts till det man anger istället för /uppgift/
+3|2|ladda /fil/|ladda lista från valfri fil
+3|2|spara /fil/|spara uppgifterna på ny fil med angivet filnamn
+2|3|refaktorera/städa|snygga till koden och refaktorera

@@ -233,8 +233,7 @@ namespace dtp15_todolist
     {
         public static void Main(string[] args)
         {
-            int w = Console.LargestWindowWidth - 30;
-            Console.SetWindowSize(w, 30);
+            WindowSize();
             Console.WriteLine("Välkommen till att-göra-listan!");
             Todo.PrintHelp();
             string command;
@@ -251,7 +250,8 @@ namespace dtp15_todolist
                     if (strArr.Length > 1)
                     {
                         Todo.ReadListFromFileOtherFile(strArr[1]);
-                    }else
+                    }
+                    else
                         Todo.ReadListFromFile();
                 }
                 else if (MyIO.Equals(command, "sluta"))
@@ -278,11 +278,12 @@ namespace dtp15_todolist
                 }
                 else if (MyIO.Equals(command, "beskriv"))
                 {
-                    
+
                     if (MyIO.HasArgument(command, "allt"))
                     {
                         Todo.PrintTodoList(true);
-                    }else
+                    }
+                    else
                         Todo.PrintTodoListActive(true);
 
                 }
@@ -299,7 +300,7 @@ namespace dtp15_todolist
                         Todo.SaveList(command);
                     }
                     else
-                    Todo.SaveList();
+                        Todo.SaveList();
                 }
                 else if (MyIO.Equals(command, "aktivera"))
                 {
@@ -322,6 +323,12 @@ namespace dtp15_todolist
                 }
             }
             while (true);
+        }
+
+        private static void WindowSize()
+        {
+            int w = Console.LargestWindowWidth - 30;
+            Console.SetWindowSize(w, 30);
         }
 
         private static void setStatusActive(string command)
